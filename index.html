@@ -4,258 +4,402 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'écho du monde - Louis Moras</title>
-    
-    <meta name="description" content="Découvrez 'L'écho du monde - Tome 1' de Louis Moras. Une épopée initiatique où le secret des quipus célestes révèle une vérité oubliée. Disponible en broché et ebook.">
+    <meta name="description" content="Découvrez 'L'écho du monde - Tome 1' de Louis Moras. Une épopée initiatique où le secret des quipus célestes révèle une vérité oubliée.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-color: #0f172a; /* Bleu cosmique très sombre */
-            --accent-color: #fbbf24; /* Doré éclatant */
-            --text-color: #334155;
-            --bg-light: #f8fafc;
+            --bg-deep: #05070a;
+            --text-main: #e2e8f0;
+            --gold: #FFD700;
+            --blue-glow: #4facfe;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Lato', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-light);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* En-tête avec effet stellaire */
+        /* --- Fond Animé (Canvas) --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1f35 0%, #000000 100%);
+        }
+
+        /* --- Header / Hero --- */
         header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #fff;
-            padding: 4rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 4px solid var(--accent-color);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s ease forwards;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: clamp(3rem, 8vw, 5rem);
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         h2 {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--blue-glow);
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
             font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
         }
 
-        .author-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.05);
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            color: rgba(255,255,255,0.5);
+            font-size: 1.5rem;
         }
 
-        /* Contenu Principal */
-        .main-container {
-            max-width: 1100px;
+        /* --- Section Principale (Livre + Texte) --- */
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 4rem 2rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 3rem;
             align-items: center;
             justify-content: center;
+            gap: 4rem;
         }
 
-        /* Image du Livre */
-        .book-cover-wrapper {
-            flex: 0 0 300px; /* Largeur fixe pour la couverture */
-            position: relative;
+        .book-container {
+            flex: 1 1 300px;
+            max-width: 400px;
+            perspective: 1000px;
         }
 
-        .book-cover-wrapper img {
+        .book-cover {
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
-            transform: rotate(-2deg); /* Petite rotation stylée */
-            transition: transform 0.3s ease;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
+            animation: float 6s ease-in-out infinite;
+            transition: transform 0.5s ease;
         }
 
-        .book-cover-wrapper img:hover {
-            transform: rotate(0deg) scale(1.02);
+        .book-cover:hover {
+            transform: scale(1.05) rotateY(-5deg);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
         }
 
-        /* Texte du Synopsis */
-        .synopsis-content {
-            flex: 1;
-            min-width: 300px;
+        .text-content {
+            flex: 1 1 400px;
         }
 
-        .synopsis-content h3 {
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .text-content h3 {
             font-family: 'Cinzel', serif;
-            color: var(--primary-color);
-            font-size: 1.8rem;
+            color: var(--gold);
+            font-size: 2rem;
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
         }
 
-        .synopsis-text {
+        .text-content p {
+            margin-bottom: 1.2rem;
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #cbd5e1;
         }
 
-        .highlight {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* Section Boutons d'achat */
-        .buy-section {
-            background-color: #fff;
-            padding: 3rem 1rem;
+        /* --- Boutons d'achat --- */
+        .shop-section {
+            padding: 4rem 2rem;
             text-align: center;
-            border-top: 1px solid #e2e8f0;
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1rem;
-            max-width: 900px;
+        .grid-shops {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .btn {
+        .shop-btn {
+            position: relative;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border-radius: 4px;
+            min-width: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            background-color: white;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+            gap: 10px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            background-color: var(--primary-color);
-            color: white;
+        .shop-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: 0.5s;
         }
 
-        .btn-booknode {
-            border-color: #20b2aa;
-            color: #20b2aa;
-        }
-        .btn-booknode:hover {
-            background-color: #20b2aa;
-            color: white;
+        .shop-btn:hover::before {
+            left: 100%;
         }
 
-        .btn i { margin-right: 10px; }
+        .shop-btn:hover {
+            background: var(--gold);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Specific styles for different buttons if needed, currently uniform for elegance */
 
         footer {
             text-align: center;
             padding: 2rem;
-            background-color: var(--primary-color);
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--card-border);
         }
 
-        /* Mobile */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .book-cover-wrapper img { transform: none; max-width: 200px; margin: 0 auto; display: block; }
-            .main-container { flex-direction: column; text-align: center; }
-            .synopsis-content h3 { border-left: none; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; padding-left: 0; display: inline-block;}
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Animation au scroll (JS Class) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+    <canvas id="canvas-container"></canvas>
+
     <header>
-        <h1>L'écho du monde</h1>
-        <h2>Tome 1 : Le secret des quipus célestes</h2>
-        <span class="author-badge">Louis Moras</span>
+        <div class="hero-content">
+            <h1>L'ÉCHO DU MONDE</h1>
+            <h2>Le secret des quipus célestes</h2>
+            <p style="text-transform: uppercase; letter-spacing: 3px; margin-top: 1rem; color: rgba(255,255,255,0.7);">Louis Moras</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </header>
 
-    <div class="main-container">
-        <div class="book-cover-wrapper">
-            <img src="couverture.jpg">
-        </div>
-
-        <div class="synopsis-content">
-            <h3>Au-delà du silence, la vérité</h3>
-            <div class="synopsis-text">
-                <p>Et si les réponses que l'humanité cherche depuis toujours étaient sous nos yeux, nouées dans les fils du passé ?</p>
-                <br>
-                <p>Dans <span class="highlight">"Le secret des quipus célestes"</span>, Louis Moras tisse une toile narrative fascinante entre sagesse ancestrale et mystères cosmiques. Ce premier tome de la saga <em>L'écho du monde</em> vous invite à suivre un chemin initiatique inattendu.</p>
-                <br>
-                <p>Des montagnes sacrées aux confins de l'univers, découvrez une aventure où chaque énigme résolue ouvre la porte à une question plus profonde sur notre place dans l'univers.</p>
-                <br>
-                <p style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--primary-color);">Laissez-vous emporter par l'écho.</p>
+    <main>
+        <section class="container">
+            <div class="book-container reveal">
+                <img src="couverture.jpg" alt="L'écho du monde Tome 1" class="book-cover">
             </div>
-        </div>
-    </div>
 
-    <section class="buy-section">
-        <h3 class="section-title">Commander le livre</h3>
-        <div class="buttons-grid">
-            
-            <a href="https://www.librinova.com/librairie/louis-moras/lecho-du-monde-tome-1" target="_blank" class="btn">
-                <i class="fas fa-book-open"></i> Librinova
-            </a>
+            <div class="text-content reveal">
+                <div class="glass-card">
+                    <h3>Au-delà du silence...</h3>
+                    <p>Et si les réponses que l'humanité cherche depuis toujours étaient sous nos yeux, nouées dans les fils du passé ?</p>
+                    <p>Dans <strong style="color:var(--gold)">"Le secret des quipus célestes"</strong>, une toile narrative fascinante se tisse entre sagesse ancestrale et mystères cosmiques.</p>
+                    <p>Des montagnes sacrées aux confins de l'univers, découvrez une aventure où chaque énigme résolue ouvre la porte à une question plus profonde sur notre place dans l'univers.</p>
+                    <p style="font-style: italic; color: var(--blue-glow); margin-top: 1rem;">Laissez-vous emporter par l'écho.</p>
+                </div>
+            </div>
+        </section>
 
-            <a href="https://www.decitre.fr/ebooks/l-echo-du-monde-tome-1-9791040596325_9791040596325_10024.html" target="_blank" class="btn">
-                <i class="fas fa-shopping-bag"></i> Decitre
-            </a>
-
-            <a href="https://e-librairie.leclerc/product/9791040596325_9791040596325_10024/lecho-du-monde-tome1" target="_blank" class="btn">
-                <i class="fas fa-shopping-cart"></i> E.Leclerc
-            </a>
-
-            <a href="https://www.cultura.com/p-l-echo-du-monde-tome-1-le-secret-des-quipus-celestes-12827495.html" target="_blank" class="btn">
-                <i class="fas fa-store"></i> Cultura
-            </a>
-
-            <a href="https://www.bol.com/be/fr/p/l-echo-du-monde-tome-1/9300000253885464/" target="_blank" class="btn">
-                <i class="fas fa-globe-europe"></i> Bol.com
-            </a>
-
-            <a href="https://booknode.com/lecho_du_monde_tome_1_le_secret_des_quipus_celestes_03677531" target="_blank" class="btn btn-booknode">
-                <i class="fas fa-comments"></i> Avis Booknode
-            </a>
-
-        </div>
-    </section>
+        <section class="shop-section reveal">
+            <h3 class="section-title">Commencer l'aventure</h3>
+            <div class="grid-shops">
+                <a href="https://www.librinova.com/librairie/louis-moras/lecho-du-monde-tome-1" target="_blank" class="shop-btn">
+                    <i class="fas fa-book-open"></i> Librinova
+                </a>
+                <a href="https://www.decitre.fr/ebooks/l-echo-du-monde-tome-1-9791040596325_9791040596325_10024.html" target="_blank" class="shop-btn">
+                    <i class="fas fa-shopping-bag"></i> Decitre
+                </a>
+                <a href="https://e-librairie.leclerc/product/9791040596325_9791040596325_10024/lecho-du-monde-tome1" target="_blank" class="shop-btn">
+                    <i class="fas fa-shopping-cart"></i> E.Leclerc
+                </a>
+                <a href="https://www.cultura.com/p-l-echo-du-monde-tome-1-le-secret-des-quipus-celestes-12827495.html" target="_blank" class="shop-btn">
+                    <i class="fas fa-store"></i> Cultura
+                </a>
+                <a href="https://www.bol.com/be/fr/p/l-echo-du-monde-tome-1/9300000253885464/" target="_blank" class="shop-btn">
+                    <i class="fas fa-globe-europe"></i> Bol.com
+                </a>
+                <a href="https://booknode.com/lecho_du_monde_tome_1_le_secret_des_quipus_celestes_03677531" target="_blank" class="shop-btn" style="border-color: #20b2aa; color: #20b2aa;">
+                    <i class="fas fa-comments"></i> Avis Booknode
+                </a>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        &copy; 2025 Louis Moras. Tous droits réservés.
+        <p>&copy; 2025 Louis Moras. Tous droits réservés.</p>
     </footer>
 
-</body>
+    <script>
+        // --- 1. Animation des étoiles et connexions (Style Quipus/Constellation) ---
+        const canvas = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
+        let particlesArray;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2; // Taille des étoiles
+                this.speedX = (Math.random() * 0.5) - 0.25;
+                this.speedY = (Math.random() * 0.5) - 0.25;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                
+                // Dessiner les liens (Quipus/Constellations)
+                for (let j = i; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance/100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+        // --- 2. Animation au Scroll (Fade In) ---
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+            reveals.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        // Déclencher une fois au chargement
+        revealOnScroll();
+    </script>
+</body>
 </html>
