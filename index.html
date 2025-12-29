@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'écho du monde - Louis Moras</title>
+    
+    <meta name="description" content="Découvrez 'L'écho du monde - Tome 1' de Louis Moras. Une épopée initiatique où le secret des quipus célestes révèle une vérité oubliée. Disponible en broché et ebook.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0f172a; /* Bleu cosmique très sombre */
+            --accent-color: #fbbf24; /* Doré éclatant */
+            --text-color: #334155;
+            --bg-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+
+        /* En-tête avec effet stellaire */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .author-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Contenu Principal */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Image du Livre */
+        .book-cover-wrapper {
+            flex: 0 0 300px; /* Largeur fixe pour la couverture */
+            position: relative;
+        }
+
+        .book-cover-wrapper img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+            transform: rotate(-2deg); /* Petite rotation stylée */
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover-wrapper img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Texte du Synopsis */
+        .synopsis-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .synopsis-content h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        .synopsis-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Section Boutons d'achat */
+        .buy-section {
+            background-color: #fff;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-booknode {
+            border-color: #20b2aa;
+            color: #20b2aa;
+        }
+        .btn-booknode:hover {
+            background-color: #20b2aa;
+            color: white;
+        }
+
+        .btn i { margin-right: 10px; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .book-cover-wrapper img { transform: none; max-width: 200px; margin: 0 auto; display: block; }
+            .main-container { flex-direction: column; text-align: center; }
+            .synopsis-content h3 { border-left: none; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; padding-left: 0; display: inline-block;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>L'écho du monde</h1>
+        <h2>Tome 1 : Le secret des quipus célestes</h2>
+        <span class="author-badge">Louis Moras</span>
+    </header>
+
+    <div class="main-container">
+        <div class="book-cover-wrapper">
+            <img src="https://m.media-amazon.com/images/I/41-l3+bCynL._SY445_SX342_.jpg" alt="Couverture du livre">
+        </div>
+
+        <div class="synopsis-content">
+            <h3>Au-delà du silence, la vérité</h3>
+            <div class="synopsis-text">
+                <p>Et si les réponses que l'humanité cherche depuis toujours étaient sous nos yeux, nouées dans les fils du passé ?</p>
+                <br>
+                <p>Dans <span class="highlight">"Le secret des quipus célestes"</span>, Louis Moras tisse une toile narrative fascinante entre sagesse ancestrale et mystères cosmiques. Ce premier tome de la saga <em>L'écho du monde</em> vous invite à suivre un chemin initiatique inattendu.</p>
+                <br>
+                <p>Des montagnes sacrées aux confins de l'univers, découvrez une aventure où chaque énigme résolue ouvre la porte à une question plus profonde sur notre place dans l'univers.</p>
+                <br>
+                <p style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--primary-color);">Laissez-vous emporter par l'écho.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="buy-section">
+        <h3 class="section-title">Commander le livre</h3>
+        <div class="buttons-grid">
+            
+            <a href="https://www.librinova.com/librairie/louis-moras/lecho-du-monde-tome-1" target="_blank" class="btn">
+                <i class="fas fa-book-open"></i> Librinova
+            </a>
+
+            <a href="https://www.decitre.fr/ebooks/l-echo-du-monde-tome-1-9791040596325_9791040596325_10024.html" target="_blank" class="btn">
+                <i class="fas fa-shopping-bag"></i> Decitre
+            </a>
+
+            <a href="https://e-librairie.leclerc/product/9791040596325_9791040596325_10024/lecho-du-monde-tome1" target="_blank" class="btn">
+                <i class="fas fa-shopping-cart"></i> E.Leclerc
+            </a>
+
+            <a href="https://www.cultura.com/p-l-echo-du-monde-tome-1-le-secret-des-quipus-celestes-12827495.html" target="_blank" class="btn">
+                <i class="fas fa-store"></i> Cultura
+            </a>
+
+            <a href="https://www.bol.com/be/fr/p/l-echo-du-monde-tome-1/9300000253885464/" target="_blank" class="btn">
+                <i class="fas fa-globe-europe"></i> Bol.com
+            </a>
+
+            <a href="https://booknode.com/lecho_du_monde_tome_1_le_secret_des_quipus_celestes_03677531" target="_blank" class="btn btn-booknode">
+                <i class="fas fa-comments"></i> Avis Booknode
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Louis Moras. Tous droits réservés.
+    </footer>
+
+</body>
+</html>
