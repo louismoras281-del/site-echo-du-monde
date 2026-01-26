@@ -144,6 +144,32 @@
             color: #cbd5e1;
         }
 
+        /* --- NOUVEAU : Style Bouton Extrait PDF --- */
+        .extract-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .extract-btn:hover {
+            background: var(--gold);
+            color: var(--bg-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
         /* --- Boutons d'achat --- */
         .shop-section {
             padding: 4rem 2rem;
@@ -208,8 +234,6 @@
             color: var(--bg-deep);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
-
-        /* Specific styles for different buttons if needed, currently uniform for elegance */
 
         footer {
             text-align: center;
@@ -280,6 +304,10 @@
                     <p>Dans <strong style="color:var(--gold)">"Le secret des quipus célestes"</strong>, une toile narrative fascinante se tisse entre sagesse ancestrale et mystères cosmiques.</p>
                     <p>Des montagnes sacrées aux confins de l'univers, découvrez une aventure où chaque énigme résolue ouvre la porte à une question plus profonde sur notre place dans l'univers.</p>
                     <p style="font-style: italic; color: var(--blue-glow); margin-top: 1rem;">Laissez-vous emporter par l'écho.</p>
+                    
+                    <a href="extrait.pdf" target="_blank" class="extract-btn">
+                        <i class="fas fa-file-pdf"></i> Lire un extrait
+                    </a>
                 </div>
             </div>
         </section>
@@ -326,7 +354,7 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2; // Taille des étoiles
+                this.size = Math.random() * 2; 
                 this.speedX = (Math.random() * 0.5) - 0.25;
                 this.speedY = (Math.random() * 0.5) - 0.25;
             }
@@ -358,7 +386,6 @@
                 particlesArray[i].update();
                 particlesArray[i].draw();
                 
-                // Dessiner les liens (Quipus/Constellations)
                 for (let j = i; j < particlesArray.length; j++) {
                     const dx = particlesArray[i].x - particlesArray[j].x;
                     const dy = particlesArray[i].y - particlesArray[j].y;
@@ -398,7 +425,6 @@
             });
         };
         window.addEventListener('scroll', revealOnScroll);
-        // Déclencher une fois au chargement
         revealOnScroll();
     </script>
 </body>
